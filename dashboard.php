@@ -1,3 +1,16 @@
+<?php session_start();
+if(!isset($_SESSION['Auth'])) {
+  echo "<h2>Access Denied</h2>";
+  sleep(1);
+  echo "<h3>Redirecting...</h3>";
+  header('Refresh:3; URL=forms/login.html');
+
+}else {
+  $users = $_SESSION['Auth']->message;
+   $username = $users[0];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +38,11 @@
   </div>
 </nav>
 <div class="container justify-content-center">
-     <h1 class="">Welcome to Zuri Authentication `USERNAME`</h1>
+     <h1 class="">Welcome to Zuri Authentication `<?php echo $username;  ?>`</h1>
 </div>
    
 </body>
 </html>
+<?php
+  }
+?>
